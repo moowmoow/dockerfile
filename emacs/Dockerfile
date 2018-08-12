@@ -2,9 +2,23 @@ FROM ubuntu:18.04
 
 MAINTAINER immoowmoow@gmail.com
 
+# apt update
+RUN apt update
+
+# locale and font install
+RUN apt install -y \
+        locales \
+        fonts-nanum \
+        fonts-nanum-coding \
+        fonts-nanum-extra \
+ && locale-gen ko_KR.UTF-8
+
+ENV LANG ko_KR.UTF-8
+ENV LANGUAGE ko
+ENV LC_ALL ko_KR.UTF-8
+
 # emacs compile dependency install
-RUN apt update \
- && apt install -y \
+RUN apt install -y \
         wget \
 	build-essential \
 	gnutls-dev \
