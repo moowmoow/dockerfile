@@ -121,6 +121,10 @@ RUN apt install -y libpq-dev \
 
 #RUN DBD::SQLite DBD::Pg DBD::mysql
 
+RUN apt install -y subversion
+RUN apt install -y git-svn
+RUN git config --global --add magit.extension svn
+
 # run emacs
 CMD "/bin/bash"
 #CMD ["emacs"]
