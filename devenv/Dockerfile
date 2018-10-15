@@ -125,6 +125,19 @@ RUN apt install -y subversion
 RUN apt install -y git-svn
 RUN git config --global --add magit.extension svn
 
+# python
+RUN apt install -y python3
+
+RUN wget https://github.com/sharkdp/fd/releases/download/v7.1.0/fd-musl_7.1.0_amd64.deb --directory-prefix=/work \
+ && dpkg -i /work/fd-musl_7.1.0_amd64.deb
+
+# 
+RUN openssl s_client -connect moowmoow.kr:20443 | tee /work/certlog \
+ && openssl x509 -inform PEM -in /work/certlog -text -out /work/certdata \
+ && cat /work/certdata > /usr/share/ca-certificates/moowmoow.kr.crt \
+ && echo "moowmoow.kr.crt" >> /etc/ca-certificates.conf \
+ && update-ca-certificates
+
 # run emacs
 CMD "/bin/bash"
 #CMD ["emacs"]
