@@ -138,6 +138,12 @@ RUN openssl s_client -connect moowmoow.kr:20443 | tee /work/certlog \
  && echo "moowmoow.kr.crt" >> /etc/ca-certificates.conf \
  && update-ca-certificates
 
+RUN wget https://github.com/naver/d2codingfont/releases/download/VER1.21/D2Coding-1.2.zip --directory-prefix=/work \
+ && mkdir /usr/share/fonts/truetype/D2Coding \
+ && unzip /work/D2Coding-1.2.zip -d /usr/share/fonts/truetype/D2Coding/ \
+ && rm -rf /usr/share/fonts/truetype/D2Coding/__MACOSX \
+ && fc-cache -f -v
+
 # run emacs
 CMD "/bin/bash"
 #CMD ["emacs"]
