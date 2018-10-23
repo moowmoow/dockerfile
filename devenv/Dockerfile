@@ -144,6 +144,11 @@ RUN wget https://github.com/naver/d2codingfont/releases/download/VER1.21/D2Codin
  && rm -rf /usr/share/fonts/truetype/D2Coding/__MACOSX \
  && fc-cache -f -v
 
+RUN apt install -y \
+ && tree \
+ && perl-doc \
+ && cvs
+
 # run emacs
 CMD "/bin/bash"
 #CMD ["emacs"]
