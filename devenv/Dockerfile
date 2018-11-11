@@ -10,17 +10,17 @@ RUN apt update \
         firefox
 
 # chrome install
-RUN apt install -y \
-        fonts-liberation \
-        libappindicator3-1 \
-        libnspr4 \
-        libnss3 \
-        libxss1 \
-        lsb-release \
-        xdg-utils
-
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
+#RUN apt install -y \
+#        fonts-liberation \
+#        libappindicator3-1 \
+#        libnspr4 \
+#        libnss3 \
+#        libxss1 \
+#        lsb-release \
+#        xdg-utils
+#
+#RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#RUN dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
 
 RUN apt install -y \
         ttf-bitstream-vera 
@@ -30,6 +30,8 @@ RUN apt install -y \
 # && fc-cache -fv
 
 # java
+RUN apt update
+
 RUN apt install -y \
         openjdk-8-jdk \
 	maven \
@@ -128,11 +130,11 @@ RUN git config --global --add magit.extension svn
 # python
 RUN apt install -y python3
 
-RUN wget https://github.com/sharkdp/fd/releases/download/v7.1.0/fd-musl_7.1.0_amd64.deb --directory-prefix=/work \
- && dpkg -i /work/fd-musl_7.1.0_amd64.deb
+RUN wget https://github.com/sharkdp/fd/releases/download/v7.2.0/fd-musl_7.2.0_amd64.deb --directory-prefix=/work \
+ && dpkg -i /work/fd-musl_7.2.0_amd64.deb
 
 # 
-RUN openssl s_client -connect moowmoow.kr:20443 | tee /work/certlog \
+RUN openssl s_client -connect moowmoow.kr:20000 | tee /work/certlog \
  && openssl x509 -inform PEM -in /work/certlog -text -out /work/certdata \
  && cat /work/certdata > /usr/share/ca-certificates/moowmoow.kr.crt \
  && echo "moowmoow.kr.crt" >> /etc/ca-certificates.conf \
@@ -143,6 +145,10 @@ RUN wget https://github.com/naver/d2codingfont/releases/download/VER1.21/D2Codin
  && unzip /work/D2Coding-1.2.zip -d /usr/share/fonts/truetype/D2Coding/ \
  && rm -rf /usr/share/fonts/truetype/D2Coding/__MACOSX \
  && fc-cache -f -v
+
+RUN apt update \
+ && export DEBIAN_FRONTEND=noninteractive \
+ && apt install -y php-cli
 
 # run emacs
 CMD "/bin/bash"
