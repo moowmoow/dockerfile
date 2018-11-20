@@ -151,11 +151,12 @@ RUN apt update \
  && export DEBIAN_FRONTEND=noninteractive \
  && apt install -y php-cli
 
-RUN apt install -y \
+RUN apt update \
+ && apt install -y \
  && tree \
  && perl-doc \
  && cvs
 
 # run emacs
-CMD "/bin/bash"
+CMD "/bin/sh"
 #CMD ["emacs"]
