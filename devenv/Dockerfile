@@ -49,7 +49,7 @@ RUN apt install -y \
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-RUN gpg --keyserver hkp://keys.gnupg.net:80 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+RUN gpg2 --keyserver hkp://keys.gnupg.net:80 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 RUN curl -sSL https://get.rvm.io | bash -s stable
 
 # edbi setting
@@ -153,9 +153,9 @@ RUN apt update \
 
 RUN apt update \
  && apt install -y \
- && tree \
- && perl-doc \
- && cvs
+    tree \
+    perl-doc \
+    cvs
 
 # run emacs
 CMD "/bin/sh"
