@@ -65,6 +65,8 @@ RUN apt install -y \
         clojure \
         leiningen
 
+RUN apt update
+
 RUN apt install -y \
         net-tools \
         vim \
