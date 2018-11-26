@@ -91,7 +91,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt install -y \
 RUN apt install -y \
         zsh
 
-RUN chsh -s `which zsh`
+# RUN chsh -s `which zsh`
 
 RUN apt install -y \
         software-properties-common
@@ -118,10 +118,12 @@ RUN . $NVM_DIR/nvm.sh \
  && npm install -g tern
 
 # edbi setting
-RUN cpan RPC::EPC::Service DBI
+#RUN cpan RPC::EPC::Service DBI
 
-RUN apt install -y libpq-dev \
- && cpan DBD::Pg
+#RUN apt install -y libpq-dev \
+# && cpan DBD::Pg
+
+RUN apt install -y libpq-dev
 
 #RUN DBD::SQLite DBD::Pg DBD::mysql
 
