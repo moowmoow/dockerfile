@@ -159,6 +159,14 @@ RUN apt update \
     perl-doc \
     cvs
 
+RUN apt install -y \
+    zip
+
+RUN curl -s https://get.sdkman.io | bash
+
+RUN source "/root/.sdkman/bin/sdkman-init.sh" \
+ && sdk install springboot
+
 # run emacs
 CMD "/bin/sh"
 #CMD ["emacs"]
