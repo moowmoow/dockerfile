@@ -2,6 +2,9 @@ FROM moowmoow/emacs
 
 MAINTAINER immoowmoow@gmail.com
 
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt update
+
 ################################################################################
 # PERL  
 ################################################################################
@@ -13,8 +16,7 @@ RUN apt install -y \
 # PHP  
 ################################################################################
 
-RUN DEBIAN_FRONTEND=noninteractive
- && apt install -y php-cli
+RUN apt install -y php-cli
 
 ################################################################################
 # PYTHON  
@@ -37,7 +39,8 @@ RUN apt install -y \
 # ruby 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-RUN gpg2 --keyserver hkp://keys.gnupg.net:80 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+RUN gpg2 --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+#RUN gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 RUN curl -sSL https://get.rvm.io | bash -s stable
 
 # edbi setting
@@ -50,11 +53,11 @@ RUN apt install -y \
         clojure \
         leiningen
 
-RUN DEBIAN_FRONTEND=noninteractive apt install -y \
+RUN apt install -y \
         wireshark
 
 RUN apt install -y \
-        libpcre3-dev \
+        libpcre3-dev
 
 # nodejs
 ENV NVM_DIR /usr/local/nvm
@@ -102,6 +105,9 @@ RUN curl -s https://get.sdkman.io | bash
 
 RUN source "/root/.sdkman/bin/sdkman-init.sh" \
  && sdk install springboot
+
+# PANDOC
+RUN apt install -y pandoc
 
 # run emacs
 CMD "/bin/sh"
