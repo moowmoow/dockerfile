@@ -109,6 +109,13 @@ RUN source "/root/.sdkman/bin/sdkman-init.sh" \
 # PANDOC
 RUN apt install -y pandoc
 
+################################################################################
+# LISP
+################################################################################
+
+# COMMON-LISP
+RUN apt install -y sbcl
+
 # run emacs
 CMD "/bin/sh"
 #CMD ["emacs"]
